@@ -1,6 +1,5 @@
 import os.path
 import boto3
-import sys
 import yaml
 
 
@@ -12,34 +11,31 @@ def main():
     # parse the config values into program variables
     bucket_name = config_values['s3']['bucket_name']
     object_path = config_values['s3']['obj_destination_path']
-    file_abs_path = sys.argv[1]
+    source_config = config_values['data_warehouse']['source_directory']
+    # get the abs path of the source directory relative to the current directory
+    source_directory = os.path.abspath(os.path.dirname(source_config))
 
-    print(f'bucket_name: {bucket_name}')
-    print(f'object_name: {object_path}')
-    print(f'file_abs_path: {file_abs_path}')
-
-    file_name = os.path.basename(file_abs_path)
-
-    # setup the s3 resource
+    # create the s3 resource object
     s3 = boto3.resource(
         service_name='s3',
         region_name='us-east-1'
     )
 
-    # get the bucket from s3
+    # get the bucket from s3 and the objects in the bucket within the object path
     bucket = s3.Bucket(bucket_name)
-    # get the objects in the bucket within the object path
-    objects = bucket.objects.filter(Prefix=object_path)
-    for obj in objects:
-        # if the file is not in the bucket already, put the file in s3
-        if obj.key == object_path + file_name:
-            print(f'File {file_name} already exists in the s3 bucket path {object_path}.')
-        else:
-            new_s3_object = s3.Object(bucket_name, object_path + file_name)
-            # new_s3_object.put()
-            print(f'Uploaded {file_name} to s3.')
+    existing_objects = bucket.objects.filter(Prefix=object_path)
 
-    print('Upload complete.')
+    # for each file in the source dir check to see if it exists in the s3 bucket and upload it if not
+    for local_file in os.listdir(source_directory):
+        put_path = object_path + local_file
+
+        if any([obj.key == put_path for obj in existing_objects]):
+            print(f'Existing file: {local_file} is already in the s3 bucket path: {object_path}.')
+        else:
+            # create the new s3 object and put it in s3
+            new_s3_object = s3.Object(bucket_name, object_path + local_file)
+            new_s3_object.put()
+            print(f'Uploaded: {local_file} to s3 in the bucket path: {object_path}.')
 
 
 main()
