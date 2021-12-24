@@ -1,0 +1,3 @@
+s3:
+  bucket_name: "espark-data-lake"
+  obj_destination_path: "insights-emails/principal-alerts/"
