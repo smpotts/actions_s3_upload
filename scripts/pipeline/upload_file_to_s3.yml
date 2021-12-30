@@ -3,3 +3,4 @@ s3:
   princ_alert_query_destination: "insights-emails/principal-alerts/data-retrieval-queries/"
 data_warehouse:
   princ_alert_source_dir: "principal-alerts/"
+  
