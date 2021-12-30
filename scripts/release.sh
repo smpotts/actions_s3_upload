@@ -1,3 +1,6 @@
+aws_access_key=$1
+aws_access_secret=$2
+
 # Install required dependencies for Python script.
 pip3 install boto3
 pip3 install pyyml

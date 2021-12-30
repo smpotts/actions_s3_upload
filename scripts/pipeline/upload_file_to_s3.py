@@ -1,4 +1,6 @@
 import os.path
+import sys
+
 import boto3
 import yaml
 
@@ -18,7 +20,9 @@ def main():
     # create the s3 resource object
     s3 = boto3.resource(
         service_name='s3',
-        region_name='us-east-1'
+        region_name='us-east-1',
+        aws_access_key_id=sys.argv[1],
+        aws_secret_access_key=sys.argv[2]
     )
 
     # get the bucket from s3 and the objects in the bucket within the object path
