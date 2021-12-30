@@ -5,7 +5,7 @@ import yaml
 
 def main():
     # read config values from the yml into a dictionary
-    with open('upload_file_to_s3.yml', 'r') as config_file:
+    with open('pipeline/upload_file_to_s3.yml', 'r') as config_file:
         config_values = yaml.safe_load(config_file)
 
     # parse the config values into program variables
