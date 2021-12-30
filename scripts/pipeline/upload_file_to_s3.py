@@ -12,8 +12,8 @@ def main():
 
     # parse the config values into program variables
     bucket_name = config_values['s3']['bucket_name']
-    object_path = config_values['s3']['obj_destination_path']
-    source_config = config_values['data_warehouse']['source_directory']
+    object_path = config_values['s3']['princ_alert_query_destination']
+    source_config = config_values['data_warehouse']['princ_alert_source_dir']
     # get the abs path of the source directory relative to the current directory
     source_directory = os.path.abspath(os.path.dirname(source_config))
 

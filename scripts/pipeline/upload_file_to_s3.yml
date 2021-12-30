@@ -1,5 +1,5 @@
 s3:
   bucket_name: "espark-data-lake"
-  obj_destination_path: "insights-emails/principal-alerts/data-retrieval-queries/"
+  princ_alert_query_destination: "insights-emails/principal-alerts/data-retrieval-queries/"
 data_warehouse:
-  source_directory: "principal-alerts/"
+  princ_alert_source_dir: "principal-alerts/"
