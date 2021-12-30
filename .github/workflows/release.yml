@@ -9,4 +9,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Release to S3
-      run: bash scripts/pipeline/release.sh ${{secrets.S3_Principal_Alert_Query_Bucket}} "/Users/spotts/Work/Projects/sandbox/gitlab-ci-demo/.github/workflows/myapp.zip" ${{secrets.AWS_Access_Key}} ${{secrets.AWS_Access_Secret}} "myapp.zip"
+      run: bash scripts/pipeline/release.sh
