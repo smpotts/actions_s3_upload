@@ -12,6 +12,7 @@ At the moment, the project is setup to upload all the files in the 'uploads' fol
 
 ## Testing Locally
 To test this locally, I find the best thing to do is to copy line in the release.sh file that runs the upload script:
-```python3 scripts/pipeline/upload_file_to_s3.py "$aws_access_key" "$aws_access_secret"
+```
+python3 scripts/pipeline/upload_file_to_s3.py "$aws_access_key" "$aws_access_secret"
 ```
 If you need to debug the upload script, make sure to modify the path to the config file in "upload_file_to_s3.py" to use the relative path: '../../scripts/pipeline/upload_file_to_s3.yml'.
